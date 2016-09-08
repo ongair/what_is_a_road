@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908121422) do
+ActiveRecord::Schema.define(version: 20160908121731) do
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "file_url"
+    t.integer  "report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "photos", ["report_id"], name: "index_photos_on_report_id"
 
   create_table "reports", force: :cascade do |t|
     t.float    "latitude"
