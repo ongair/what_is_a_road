@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908121731) do
+ActiveRecord::Schema.define(version: 20160908125904) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "file_url"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20160908121731) do
     t.integer  "road_id"
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "complete",   default: false
   end
 
   add_index "reports", ["road_id"], name: "index_reports_on_road_id"
