@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908120821) do
+ActiveRecord::Schema.define(version: 20160908121422) do
+
+  create_table "reports", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "road_id"
+    t.text     "comment"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reports", ["road_id"], name: "index_reports_on_road_id"
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id"
 
   create_table "roads", force: :cascade do |t|
     t.string   "name"
