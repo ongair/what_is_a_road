@@ -2,7 +2,7 @@ require 'telegrammer'
 
 class Telegram
 	def self.bot
-		Telegrammer::Bot.new(Rails.application.secrets.bot_token)
+		Telegrammer::Bot.new(ENV['BOT_TOKEN'])
 	end
 
 	def self.update params
@@ -13,7 +13,7 @@ class Telegram
 	end
 
 	# def self.send_message user, text
-	# 	HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: Rails.application.secrets.ongair_token, external_id: user.external_id, text: text, thread: true})
+	# 	HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: ENV['ONGAIR_TOKEN'], external_id: user.external_id, text: text, thread: true})
 	# end
 
 	def self.send_keyboard user, text="", options=[]
