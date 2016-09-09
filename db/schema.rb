@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908125904) do
+ActiveRecord::Schema.define(version: 20160909092529) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "file_url"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20160908125904) do
 
   create_table "roads", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.string   "name"
+    t.string   "step_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
