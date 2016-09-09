@@ -1,13 +1,8 @@
 require 'telegrammer'
-require 'ongair_ruby'
 
 class Telegram
 	def self.bot
 		Telegrammer::Bot.new(Rails.application.secrets.bot_token)
-	end
-
-	def self.ongair
-		OngairRuby::ClientV1.new(Rails.application.secrets.ongair_token)
 	end
 
 	def self.update params
@@ -18,7 +13,6 @@ class Telegram
 	end
 
 	# def self.send_message user, text
-	# 	# ongair.send_text_message(user.external_id, text)
 	# 	HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: Rails.application.secrets.ongair_token, external_id: user.external_id, text: text, thread: true})
 	# end
 

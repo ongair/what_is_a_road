@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/ongair/ongair-ruby.git
-  revision: f01016b4db6806c765405f8f51f0558b4ebd706d
-  specs:
-    ongair_ruby (0.0.7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -223,7 +217,6 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.0)
   jquery-rails
-  ongair_ruby!
   pg
   pry
   pry-nav
