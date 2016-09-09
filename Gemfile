@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'ongair_ruby', git: 'git://github.com/ongair/ongair-ruby.git'
 gem 'telegrammer'
 gem 'httparty'
+gem 'rails_admin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
