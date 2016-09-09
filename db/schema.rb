@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909092529) do
+ActiveRecord::Schema.define(version: 20160909092709) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "file_url"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20160909092529) do
   end
 
   add_index "photos", ["report_id"], name: "index_photos_on_report_id"
+
+  create_table "progresses", force: :cascade do |t|
+    t.integer  "report_id"
+    t.integer  "step_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "progresses", ["report_id"], name: "index_progresses_on_report_id"
+  add_index "progresses", ["step_id"], name: "index_progresses_on_step_id"
 
   create_table "reports", force: :cascade do |t|
     t.float    "latitude"
