@@ -16,6 +16,16 @@ class Telegram
 	# 	HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: ENV['ONGAIR_TOKEN'], external_id: user.external_id, text: text, thread: true})
 	# end
 
+	def self.request_location user, text
+		# https://api.telegram.org/bot270331460:AAEXchRw0bR2l9h1YJRbEHLl_H225iKRkKw/sendMessage?text=Hello&chat_id=80474561&reply_markup=
+		reply_markup = {
+			keyboard: [[{text: "Report", request_location: true}]],
+			resize_keyboard: true,
+			one_time_keyboard: false
+		}
+		HTTParty.post("https://api.telegram.org/bot#{ENV['BOT_TOKEN']}/sendMessage", body: {chat_id: user.external_id, text: text, reply_markup: reply_markup})
+	end
+
 	def self.send_keyboard user, text="", options=[]
 		reply_markup = Telegrammer::DataTypes::ReplyKeyboardMarkup.new(
 		  keyboard: options,
