@@ -24,6 +24,7 @@ gem 'telegrammer'
 gem 'httparty'
 gem 'rails_admin'
 gem "figaro"
+gem 'geocoder'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
