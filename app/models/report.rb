@@ -15,7 +15,7 @@
 
 class Report < ActiveRecord::Base
   reverse_geocoded_by :latitude, :longitude, address: :address
-  after_validation :reverse_geocode, if: ->(obj){ obj.latitude.present? and obj.latitude_changed? }
+  after_validation :reverse_geocode, if: ->(obj){ obj.latitude.present? and obj.latitude_changed? and !obj.address.present? }
 
   belongs_to :road
   belongs_to :user
