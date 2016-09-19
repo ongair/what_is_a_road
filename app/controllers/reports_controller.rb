@@ -2,7 +2,7 @@ require "telegram"
 class ReportsController < ApplicationController
 	def create
 		if params[:notification_type] != "MessageSent"
-			params[:external_contact_id] = User.last.external_id if !User.last.nil? && params[:external_contact_id].blank?
+			# params[:external_contact_id] = User.last.external_id if !User.last.nil? && params[:external_contact_id].blank?
 			user = User.find_by external_id: params[:external_contact_id]
 			message = nil
 			if user.nil?
@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
 					run_commands(params)
 				else
 					msg = "Hello\nWelcome to #WhatIsARoad. Help us map the potholes you see in 3 easy steps.\n\nSend /report or click on the 'Report' button below to submit a new report."
-					Telegram.send_keyboard(user, msg, [['Report']])
+					Telegram.send_message(user, msg, 'Report')
 				end
 			else
 				if is_command?(params)
@@ -88,7 +88,7 @@ class ReportsController < ApplicationController
 							if step.next_step.nil?
 								report.update(complete: true)
 								if message.nil? && report.complete
-									Telegram.send_keyboard(user, "Thank you for your report. If you want to report another pothole, just click on the 'Report' button again.", [['Report']])
+									Telegram.send_message(user, "Thank you for your report. If you want to report another pothole, just click on the 'Report' button again.", 'Report')
 								end
 							end
 						end
@@ -122,7 +122,7 @@ class ReportsController < ApplicationController
 			when '/restart'
 				if report.nil?
 					msg = "You don't have an incomplete report to restart. Send /report or click on the 'Report' button below to submit a new report."
-					Telegram.send_keyboard(user, msg, [['Report']])
+					Telegram.send_message(user, msg, 'Report')
 				else
 					reset_report(report)
 					report = start_report(user)
@@ -142,7 +142,7 @@ class ReportsController < ApplicationController
 			when '/start'
 				if report.nil?
 					msg = "Hello\nWelcome to #WhatIsARoad. Help us map the potholes you see in 3 easy steps.\n\nSend /report or click on the 'Report' button below to submit a new report."
-					Telegram.send_keyboard(user, msg, [['Report']])
+					Telegram.send_message(user, msg, 'Report')
 				else
 					step = report.current_step
 					message = "Please finish your report.\n\n#{step.prompt_text}"

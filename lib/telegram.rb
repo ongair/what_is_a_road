@@ -12,9 +12,9 @@ class Telegram
 		    )
 	end
 
-	# def self.send_message user, text
-	# 	HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: ENV['ONGAIR_TOKEN'], external_id: user.external_id, text: text, thread: true})
-	# end
+	def self.send_message user, text, options=""
+		HTTParty.post("https://ongair.im/api/v1/base/send", body: {token: ENV['ONGAIR_TOKEN'], external_id: user.external_id, text: text, thread: true, reply_options: options}, debug_out: $stdout)
+	end
 
 	def self.request_location user, text
 		# https://api.telegram.org/bot270331460:AAEXchRw0bR2l9h1YJRbEHLl_H225iKRkKw/sendMessage?text=Hello&chat_id=80474561&reply_markup=
@@ -42,23 +42,23 @@ class Telegram
 		bot.send_message(chat_id: user.external_id, text: text, reply_markup: reply_markup)
 	end
 
-	def self.send_message user, text, options=[], keyboard=false
-		if keyboard
-			reply_markup = Telegrammer::DataTypes::ReplyKeyboardMarkup.new(
-			  keyboard: options,
-			  resize_keyboard: false
-			)
-		else
-			reply_markup = Telegrammer::DataTypes::ReplyKeyboardHide.new(
-			  hide_keyboard: true
-			)
-		end
-		begin
-			bot.send_message(chat_id: user.external_id, text: text, reply_markup: reply_markup)
-		rescue Telegrammer::Errors::BadRequestError => e
+	# def self.send_message user, text, options=[], keyboard=false
+	# 	if keyboard
+	# 		reply_markup = Telegrammer::DataTypes::ReplyKeyboardMarkup.new(
+	# 		  keyboard: options,
+	# 		  resize_keyboard: false
+	# 		)
+	# 	else
+	# 		reply_markup = Telegrammer::DataTypes::ReplyKeyboardHide.new(
+	# 		  hide_keyboard: true
+	# 		)
+	# 	end
+	# 	begin
+	# 		bot.send_message(chat_id: user.external_id, text: text, reply_markup: reply_markup)
+	# 	rescue Telegrammer::Errors::BadRequestError => e
 
-		end
-	end
+	# 	end
+	# end
 
 	def self.send_image user, image_url, file_name="", caption="", content_type=""
 		ongair.send_image(user.external_id, image_url, file_name, caption, content_type, true)
